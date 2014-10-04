@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
+	
+<!-- 	<jdbc:embedded-database id="dataSource" type="HSQL"> -->
+<!-- 		<jdbc:script location= "classpath:/db/sampledb.sql"/> -->
+<!-- 	</jdbc:embedded-database> -->
+
+<!-- 	<bean id="dataSource" -->
+<!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource" -->
+<!-- 		p:driverClassName="com.mysql.jdbc.Driver" -->
+<!-- 		p:url="jdbc:mysql://localhost/dwindb?characterEncoding=euckr" -->
+<!-- 		p:username="root" p:password="rltjddl" /> -->
+
+
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver"/>				 
+			<property name="url" value="jdbc:mysql://localhost:3306/mydb?characterEncoding=utf-8" />
+<!-- 			<property name="url" value="jdbc:mysql://localhost:3306/biz5mall?characterEncoding=utf-8" /> -->
+			<property name="username" value="biz5mall"/>
+			<property name="password" value="mall0825"/>
+		</bean>
+</beans>

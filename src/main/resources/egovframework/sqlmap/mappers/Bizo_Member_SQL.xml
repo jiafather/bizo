@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bizo.client.service.impl.MemberMapper">
+
+	<select id="selectIsExistMemberCnt" parameterType="memberVo" resultType="int">
+			SELECT COUNT(*) totCnt
+			FROM MEMBER
+			WHERE 1=1
+			AND EXISTS (SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{memberId}
+			<if test="password != null">
+            AND PASSWORD = #{password}
+        </if>)
+	</select>
+
+	<select id="selectMember" parameterType="memberVo" resultType="egovMap">
+			SELECT 
+				*
+			FROM MEMBER
+			WHERE 1=1
+			AND MEMBER_ID = #{memberId}
+			AND PASSWORD = #{password}
+	</select>
+
+	<insert id="insertMember" parameterType="memberVo">
+		<selectKey keyProperty="memberNo" resultType="String" order="BEFORE">
+			SELECT IFNULL(MAX(MEMBER_NO), 10000)+1 FROM MEMBER   
+	  	</selectKey>	
+		INSERT INTO MEMBER(
+			MEMBER_ID,
+			MEMBER_NO,
+			MEMBER_NAME,
+			PASSWORD,
+			BIRTHDAY,
+			SEX,
+			POST,
+			ADDR1,
+			ADDR2,
+			MOBILE1,
+			MOBILE2,
+			MOBILE3,
+			EMAIL,
+			EMAIL_YN,
+			SMS_SERVICE_YN,
+			OWN_NAME_YN,
+			LAST_LOGIN_TIME,
+			NICKNAME,
+			MOBILE_COM,
+			CONFIRM_YN,
+			INSERT_DATETIME,
+			INSERT_ID,
+			USE_FLAG,
+			COMP_CODE,
+			AGT_CODE)
+		VALUES(
+			#{memberId}	
+			,#{memberNo}	
+			,#{memberName}	
+			,#{password}	
+			,#{birthday}	
+			,#{sex}		
+			,#{post}		
+			,#{addr1}		
+			,#{addr2}		
+			,#{mobile1}		
+			,#{mobile2}		
+			,#{mobile3}		
+			,#{email}		
+			,#{emailYn}	
+			,#{smsServiceYn}	
+			,#{ownNameYn}	
+			,#{lastLoginTime}	
+			,#{nickname}	
+			,#{mobileCom}	
+			,#{confirmYn}	
+			,now()
+			,#{insertId}	
+			,'Y'	
+			,#{compCode}	
+			,#{agtCode}
+		)
+	</insert>
+</mapper>
