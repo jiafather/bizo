@@ -11,7 +11,7 @@
 						WHERE M1.MEMBER_ID = M2.MEMBER_ID 
 						AND MEMBER_ID = #{memberId}
 		<if test="password != null">
-            AND PASSWORD = #{password}
+            AND PASSWORD = password(#{password})
         </if>)         
 	</select>
 
@@ -21,7 +21,7 @@
 			FROM MEMBER
 			WHERE 1=1
 			AND MEMBER_ID = #{memberId}
-			AND PASSWORD = #{password}
+			AND PASSWORD = password(#{password})
 	</select>
 
 	<insert id="insertMember" parameterType="memberVo">
@@ -58,7 +58,7 @@
 			#{memberId}	
 			,#{memberNo}	
 			,#{memberName}	
-			,#{password}	
+			,password(#{password})
 			,#{birthday}	
 			,#{sex}		
 			,#{post}		

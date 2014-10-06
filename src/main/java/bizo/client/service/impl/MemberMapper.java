@@ -19,7 +19,7 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
- * member에 관한 데이터처리 매퍼 클래스
+ * MEMBER에 관한 데이터처리 매퍼 클래스
  *
  * @author  lgs479
  * @since 2014.10.04
