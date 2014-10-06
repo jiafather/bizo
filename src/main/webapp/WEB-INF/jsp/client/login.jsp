@@ -120,7 +120,6 @@ $(function() {
 	$('#btnLogin').click(function(){
 		
 		$.post( "/login/do.do", $( "#form1" ).serialize()).done(function( data ) {
-			alert(data.isok);
 			if(data.isok=="ok"){
 				  alert("로그인 성공");
 				  return;

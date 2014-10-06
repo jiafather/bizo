@@ -14,12 +14,13 @@
 <!-- 		p:url="jdbc:mysql://localhost/dwindb?characterEncoding=euckr" -->
 <!-- 		p:username="root" p:password="rltjddl" /> -->
 
-
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 			<property name="driverClassName" value="com.mysql.jdbc.Driver"/>				 
 			<property name="url" value="jdbc:mysql://localhost:3306/mydb?characterEncoding=utf-8" />
 <!-- 			<property name="url" value="jdbc:mysql://localhost:3306/biz5mall?characterEncoding=utf-8" /> -->
-			<property name="username" value="biz5mall"/>
-			<property name="password" value="mall0825"/>
+			<property name="username" value="root"/>
+			<property name="password" value="rltjddl"/>
+<!-- 			<property name="username" value="biz5mall"/> -->
+<!-- 			<property name="password" value="mall0825"/> -->
 		</bean>
 </beans>

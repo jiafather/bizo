@@ -3,13 +3,16 @@
 <mapper namespace="bizo.client.service.impl.MemberMapper">
 
 	<select id="selectIsExistMemberCnt" parameterType="memberVo" resultType="int">
-			SELECT COUNT(*) totCnt
-			FROM MEMBER
-			WHERE 1=1
-			AND EXISTS (SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{memberId}
-			<if test="password != null">
+		SELECT COUNT(*)AS totCnt
+		FROM MEMBER M1
+		WHERE EXISTS (
+						SELECT MEMBER_ID 
+						FROM MEMBER M2 
+						WHERE M1.MEMBER_ID = M2.MEMBER_ID 
+						AND MEMBER_ID = #{memberId}
+		<if test="password != null">
             AND PASSWORD = #{password}
-        </if>)
+        </if>)         
 	</select>
 
 	<select id="selectMember" parameterType="memberVo" resultType="egovMap">

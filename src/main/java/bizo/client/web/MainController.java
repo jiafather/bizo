@@ -16,9 +16,6 @@ package bizo.client.web;
  * limitations under the License.
  */
 
-import java.util.HashMap;
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -27,16 +24,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import bizo.client.service.MemberService;
 import bizo.client.service.impl.MemberVo;
 import egovframework.example.sample.service.EgovSampleService;
-import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
-import egovframework.rte.fdl.idgnr.EgovIdGnrService;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * @Class Name : EgovSampleController.java
@@ -146,17 +141,15 @@ public class MainController {
 	public View doLogin(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
 		
 		//회원 정보를 조회 한다.
-		HashMap memberMap = memberService.selectMember(memberVo);
+		EgovMap memberMap = memberService.selectMember(memberVo);
 		
-		int cnt = memberService.selectIsExistMemberCnt(memberVo);
-		
-		model.addAttribute("cnt", cnt);
+		//나이스 로그인 성공
 		if(memberMap!=null)
 			model.addAttribute("isok", "ok");
+		//에잇 로그인 실패
 		else
 			model.addAttribute("isok", "no");
 		return ajaxMainView;
 	}
-	
 
 }

@@ -5,7 +5,8 @@
 						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	<aop:config>
-		<aop:pointcut id="serviceMethod" expression="execution(* egovframework.example..impl.*Impl.*(..)) ||  execution(* bizo..impl.*Impl.*(..))" />
+		<aop:pointcut id="serviceMethod" expression="execution(* bizo..impl.*Impl.*(..))" />
+<!-- 		<aop:pointcut id="serviceMethod" expression="execution(* egovframework.example..impl.*Impl.*(..)) ||  execution(* bizo..impl.*Impl.*(..))" /> -->
 <!-- bizo..impl.*Impl.*( -->
 		<aop:aspect ref="exceptionTransfer">
 			<aop:after-throwing throwing="exception" pointcut-ref="serviceMethod" method="transfer" />

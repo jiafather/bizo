@@ -69,12 +69,12 @@
 				<li class="alert alert-green" id="layer-idOk" style="display:none;">아이디를 사용하셔도 좋습니다.</li>
 				<li>
 					<label class="register-title">비밀번호</label>
-					<input type="password" maxlength="12" name="password" id="password">
+					<input type="password" maxlength="100" name="password" id="password">
 				</li>
 				<li class="alert" style="display:none;" id="layerPwdLenErr">비밀번호는 8자 이상 설정해 주시기 바랍니다.</li>
 				<li>
 					<label class="register-title">비밀번호 재확인</label>
-					<input type="password" maxlength="12" name="password2" id="password2">
+					<input type="password" maxlength="100" name="password2" id="password2">
 				</li>
 				<li class="alert" style="display:none;">비밀번호를 다시 확인해 주세요.</li>
 				<li>
@@ -244,13 +244,13 @@ $(function() {
     		$("#layerAgeErr").css("display", "block");
     		$("#birthday1").focus();
     		return;
+    	}else if($("#password").val().length<8){
+    		$("#password").focus();
+	    	alert("비밀번호는 8자 이상이여야 합니다.");
+	    	return;
     	}else if($("#password").val()!=$("#password2").val()){
     		$("#password2").focus();
 	    	alert("재 확인 비밀번호가 일치 하지 않습니다.");
-	    	return;
-    	}else if($("#password").val().length<8){
-    		$("#password").focus();
-	    	alert("비밀번호를 다시 확인해 주세요.");
 	    	return;
     	}else if (!$("#agreement-1").is(":checked")) { 
 	    	alert("비즈오몰 이용약관에 동의해 주세요");
@@ -303,6 +303,8 @@ $(function() {
     /* id 입력시 중복 체크 여부 false로 설정 */
     $("#memberId").keyup(function(){
     	idcheck = false;
+		$("#layer-idNo").css("display", "none");
+		$("#layer-idOk").css("display", "none");    	
     });
     /* id 중복 체크 */
     $('#btnConfirmDuplication').click(function(){

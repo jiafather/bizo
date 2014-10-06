@@ -15,8 +15,6 @@
  */
 package bizo.client.service.impl;
 
-import java.util.HashMap;
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -24,9 +22,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import bizo.client.service.MemberService;
-import egovframework.example.sample.service.SampleVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * @Class Name : memberDao.java
@@ -89,7 +87,7 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
     }
 
 	@Override
-	public HashMap selectMember(MemberVo vo) throws Exception {
+	public EgovMap selectMember(MemberVo vo) throws Exception {
 		return memberMapper.selectMember(vo);
 	}
 

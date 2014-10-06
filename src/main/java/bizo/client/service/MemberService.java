@@ -15,9 +15,8 @@
  */
 package bizo.client.service;
 
-import java.util.HashMap;
-
 import bizo.client.service.impl.MemberVo;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 
 
@@ -44,6 +43,6 @@ public interface MemberService {
      * @return
      * @throws Exception
      */
-    HashMap selectMember(MemberVo memberVo) throws Exception;
+    EgovMap selectMember(MemberVo memberVo) throws Exception;
 
 }

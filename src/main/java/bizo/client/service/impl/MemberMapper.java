@@ -15,9 +15,8 @@
  */
 package bizo.client.service.impl;
 
-import java.util.HashMap;
-
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * member에 관한 데이터처리 매퍼 클래스
@@ -41,6 +40,6 @@ public interface MemberMapper {
     
     void insertMember(MemberVo memberVo) throws Exception;
     
-    HashMap selectMember(MemberVo memberVo) throws Exception;
+    EgovMap selectMember(MemberVo memberVo) throws Exception;
 
 }
