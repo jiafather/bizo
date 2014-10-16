@@ -112,6 +112,21 @@
 					</select><span class="sep">일</span>
 				</li>
 				<li class="alert" style="display:none;" id="layerAgeErr">14세 미만은 가입이 불가능 합니다.</li>
+				<li>
+					<label class="register-title">회원사</label>
+					<select name="compCode" id="compCode" class="basic" style="width:202px;">
+						<option value=''>선택</option>
+						<c:forEach items="${companyList}" var="item" varStatus="i">
+							<option value="${item.compCode }">${item.compName }</option>
+						</c:forEach>
+					</select>
+				</li>				
+				<li>
+					<label class="register-title">에이전시</label>
+					<select name="agtCode" id="agtCode" class="basic" style="width:202px;">
+						<option value=''>선택</option>
+					</select>
+				</li>				
 			</ul>
 			<ul class="agreement">
 				<li><input type="checkbox" id="sms-yn" name="smsServiceYn" value="Y"><label for="sms-yn">이벤트/쇼핑정보 SMS 수신에 동의합니다.</label></li>
@@ -230,6 +245,31 @@ $(function() {
     $("#birthday1").change(function() {
     	$("#layerAgeErr").css("display", "none");
 	});
+    
+    /* 에이전트 목록을 얻어 온다. */
+    $("#compCode").change(function() {
+		$("#agtCode").children().remove(); // 구/군 부분의 selectBox 부분 데이터 삭제
+		$("#agtCode").append("<option value=''>선택</option>"); // option 하나 뿌려줌
+        $.get("/selectAgentList.do?compCode="+$("#compCode").val(),function(data,status){ 
+			var len = data.agentList.length;
+			for(var i=0; i<len; i++){
+				$("#agtCode").append("<option value='"+data.agentList[i].agtCode+"'>"+data.agentList[i].agtName+"</option>");
+			}
+  		});	
+		
+// 		$.ajax({
+// 			url : "/selectAgentList.do",
+// 			type : 'POST',
+// 			data : $("#form1").formToArray(),
+// 			dataType : 'json',
+// 			success : function(data) { 
+// 				alert("AS");
+// 			},
+// 			error : function(response) {
+// 				   alert("처리 중 오류가 발생했습니다. 관리자에게 문의하세요.");
+// 			}
+// 		});
+	});
 	 
     /* 회원 가입 버튼 클릭 시 */
     $('#btnJoin').click(function(){
@@ -293,6 +333,14 @@ $(function() {
     		alert("핸드폰 번호를 입력해 주세요!");
     		$("#mobile3").focus();
     		return false;
+     	}else if($("#compCode option").index($("#compCode option:selected"))==0){
+    		alert("회원사를 선택해 주세요!");
+    		$("#compCode").focus();
+    		return false;     		
+     	}else if($("#agtCode option").index($("#agtCode option:selected"))==0){
+    		alert("에이전시를 선택해 주세요!");
+    		$("#agtCode").focus();
+    		return false;     		
      	}
     	
     	return true;

@@ -16,20 +16,30 @@ package bizo.client.web;
  * limitations under the License.
  */
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import bizo.client.service.CommonService;
 import bizo.client.service.MemberService;
+import bizo.client.service.impl.AgentVo;
+import bizo.client.service.impl.CompanyVo;
 import bizo.client.service.impl.MemberVo;
-import egovframework.example.sample.service.EgovSampleService;
 import egovframework.example.sample.service.SampleVO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
@@ -54,17 +64,15 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 @SessionAttributes(types = SampleVO.class)
 public class MainController {
 
-	@Resource MappingJacksonJsonView ajaxMainView;
+	@Resource MappingJacksonJsonView ajaxView;
 
 	@Resource(name = "memberService")
 	private MemberService memberService;
 	
-	/** EgovSampleService */
-	@Resource(name = "sampleService")
-	private EgovSampleService sampleService;
+	@Resource(name = "commonService")
+	private CommonService commonService;
 	
-	/**
-	 * 로그인 화면으로 이동한다.
+	/* 로그인 화면으로 이동한다.
 	 * @param memberVo
 	 * @param model
 	 * @return
@@ -84,6 +92,10 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/join/go.do")
 	public String goJoin(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
+		//회사 목록을 조회한다.
+		CompanyVo companyVo = new CompanyVo();
+		List<?> companyList = commonService.selectCompanyList(companyVo);
+		model.addAttribute("companyList", companyList);		
 		return "client/join/join";
 	}
 	
@@ -127,7 +139,7 @@ public class MainController {
 		int cnt = memberService.selectIsExistMemberCnt(memberVo);
 		model.addAttribute("cnt", cnt);
 		
-		return ajaxMainView;
+		return ajaxView;
 	}
 	
 	/**
@@ -149,7 +161,26 @@ public class MainController {
 		//에잇 로그인 실패
 		else
 			model.addAttribute("isok", "no");
-		return ajaxMainView;
+		return ajaxView;
 	}
+	
+	/**
+	 * 에이전시 리스트를 조회한다.
+	 * @return 에이전시 리스트 json 리턴
+	 * @throws Exception
+	 */
+	@RequestMapping(value={"/selectAgentList.do"}, produces={"application/json"})
+	public @ResponseBody View selectAgentList(@ModelAttribute("agentVo") AgentVo agentVo, ModelMap model) throws Exception{
+		List<?> agentList = commonService.selectAgentList(agentVo);
+		model.put("agentList", agentList);
+		return ajaxView; //JSONValue.toJSONString(data);
+	}
+	
+//	@RequestMapping(value={"/selectAgentList.do"})
+//	public View selectAgentList2(@ModelAttribute("agentVo") AgentVo agentVo, ModelMap model) throws Exception{
+//		List<?> agentList = commonService.selectAgentList(agentVo);
+//		model.put("agentList", JSONValue.toJSONString(agentList));
+//		return ajaxView;
+//	}
 
 }

@@ -48,10 +48,10 @@
     </bean>
 	<!-- /For Pagination Tag -->
 	
-<!-- 	<bean id="jsonView"  class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" /> -->
+	<bean id="jsonView"  class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 <!-- 	<bean id="jsonView" class="bizo.common.view.JsonView"/> -->
 <!-- Ajax Json View Start -->
-<!-- 	<mvc:annotation-driven /> -->
+	<mvc:annotation-driven />
 	<bean name="ajaxView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
 	<!-- Ajax Json View End -->

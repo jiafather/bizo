@@ -121,7 +121,7 @@ $(function() {
 		
 		$.post( "/login/do.do", $( "#form1" ).serialize()).done(function( data ) {
 			if(data.isok=="ok"){
-				  alert("로그인 성공");
+				  //alert("로그인 성공");
 				  return;
 			  }else{
 				  alert("아이디 또는 비밀번호를 확인해 주세요!");

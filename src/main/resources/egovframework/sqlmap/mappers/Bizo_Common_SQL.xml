@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bizo.client.service.impl.CommonMapper">
+
+	<select id="selectCompanyList" parameterType="companyVo" resultType="egovMap" >
+		SELECT *
+		FROM COMPANY C1
+	</select>
+	
+	<select id="selectAgentList" parameterType="agentVo" resultType="egovMap" >
+		SELECT *
+		FROM AGENT C1
+		WHERE COMP_CODE = #{compCode}
+	</select>
+
+</mapper>
