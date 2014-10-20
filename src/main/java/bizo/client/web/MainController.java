@@ -16,14 +16,10 @@ package bizo.client.web;
  * limitations under the License.
  */
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
@@ -44,15 +39,15 @@ import egovframework.example.sample.service.SampleVO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
- * @Class Name : EgovSampleController.java
- * @Description : EgovSampleController Controller Class
+ * @Class Name : MainController.java
+ * @Description : MainController Controller Class
  * @Modification Information
  * @
  * @  수정일      수정자              수정내용
  * @ ---------   ---------   -------------------------------
  * @ 2014.10.03           최초생성
  *
- * @author 메인 페이지 컨트롤러
+ * @author 사용자 메인 페이지 컨트롤러
  * @since 2014. 10.03
  * @version 1.0
  * @see
