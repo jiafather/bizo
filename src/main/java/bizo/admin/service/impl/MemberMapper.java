@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package bizo.client.service.impl;
+package bizo.admin.service.impl;
 
 import java.util.List;
 
-import bizo.common.vo.AgentVo;
-import bizo.common.vo.CompanyVo;
-import egovframework.example.sample.service.SampleDefaultVO;
+import bizo.common.vo.MemberVo;
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
 /**
- * 공통에 관한 데이터처리 매퍼 클래스
+ * MEMBER에 관한 데이터처리 매퍼 클래스
  *
  * @author  lgs479
  * @since 2014.10.04
@@ -37,22 +35,10 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
  *
  * </pre>
  */
-@Mapper("commonMapper")
-public interface CommonMapper {
-
-	/**
-	 * 회사 목록을 조회한다.
-	 * @param searchVO
-	 * @return
-	 * @throws Exception
-	 */
-	List<?> selectCompanyList(CompanyVo companyVo) throws Exception;
+@Mapper("adminMemberMapper")
+public interface MemberMapper {
 	
-	/**
-	 * 에이전시 목록을 조회한다.
-	 * @param agentVo
-	 * @return
-	 * @throws Exception
-	 */
-	List<?> selectAgentList(AgentVo agentVo) throws Exception;
+	int selectMemberListCnt(MemberVo memberVo) throws Exception;
+    List<?> selectMemberList(MemberVo memberVo) throws Exception;
+
 }

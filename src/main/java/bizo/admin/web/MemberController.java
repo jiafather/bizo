@@ -16,13 +16,18 @@ package bizo.admin.web;
  * limitations under the License.
  */
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import bizo.client.service.impl.MemberVo;
+import bizo.admin.service.MemberService;
+import bizo.common.vo.MemberVo;
 import egovframework.example.sample.service.SampleVO;
 
 /**
@@ -44,8 +49,11 @@ import egovframework.example.sample.service.SampleVO;
 
 @Controller("adminMemberController")
 @SessionAttributes(types = SampleVO.class)
-public class MemberController {
+public class MemberController extends BaseController{
 
+	@Resource(name="adminMemberService")
+	private MemberService memberService;
+	
 	
 	/**
 	 *  멤버 관리 화면으로 이동한다.
@@ -56,6 +64,15 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/admin/member.list.do")
 	public String goMemberList(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
+		memberVo.setPagingVal();
+		
+		List<?> memberList = null;
+		rVo = memberService.selectMemberList(memberVo);
+		memberList = rVo.getList();
+		memberVo.setTotalCount(rVo.getTotalCount());
+		
+		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("memberList", memberList);
 		return "admin/member/list";
 	}
 	

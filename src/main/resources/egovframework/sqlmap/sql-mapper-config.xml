@@ -6,8 +6,8 @@
 		<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
 		<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
 		<typeAlias alias="sampleVO" type="egovframework.example.sample.service.SampleVO"/>
-		<typeAlias alias="memberVo" type="bizo.client.service.impl.MemberVo"/>
-		<typeAlias alias="companyVo" type="bizo.client.service.impl.CompanyVo"/>
-		<typeAlias alias="agentVo" type="bizo.client.service.impl.AgentVo"/>
+		<typeAlias alias="memberVo" type="bizo.common.vo.MemberVo"/>
+		<typeAlias alias="companyVo" type="bizo.common.vo.CompanyVo"/>
+		<typeAlias alias="agentVo" type="bizo.common.vo.AgentVo"/>
     </typeAliases>
 </configuration>

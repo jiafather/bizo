@@ -25,6 +25,8 @@ import org.springframework.stereotype.Service;
 
 import bizo.client.service.CommonService;
 import bizo.client.service.MemberService;
+import bizo.common.vo.AgentVo;
+import bizo.common.vo.CompanyVo;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;

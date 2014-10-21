@@ -7,7 +7,6 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/resources/egovframework/spring/context-datasource.xml.bakk</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/resources/egovframework/spring/context-properties.xml</config>
@@ -18,6 +17,7 @@
 		<config>src/main/resources/egovframework/spring/context-idgen.xml</config>
 		<config>src/main/resources/egovframework/spring/context-validator.xml</config>
 		<config>src/main/resources/egovframework/spring/context-mapper.xml</config>
+		<config>src/main/resources/egovframework/spring/context-datasource.xml</config>
 		<config>src/main/resources/egovframework/spring/context-transaction.xml</config>
 	</autoconfigs>
 	<configSets>

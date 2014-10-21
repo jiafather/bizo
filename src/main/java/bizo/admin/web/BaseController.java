@@ -1,3 +1,7 @@
+package bizo.admin.web;
+
+import bizo.common.vo.ReturnVO;
+
 /*
  * Copyright 2008-2009 the original author or authors.
  *
@@ -13,18 +17,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package bizo.client.service;
-
-import java.util.List;
-
-import bizo.common.vo.AgentVo;
-import bizo.common.vo.CompanyVo;
 
 
 
-public interface CommonService {
-
-	List<?> selectCompanyList(CompanyVo companyVo) throws Exception;
-	List<?> selectAgentList(AgentVo agentVo) throws Exception;
-
+public class BaseController {
+	protected ReturnVO rVo = new ReturnVO();
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package bizo.client.service.impl;
+package bizo.common.vo;
 
 import java.io.Serializable;
 

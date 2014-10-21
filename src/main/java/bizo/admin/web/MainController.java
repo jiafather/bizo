@@ -27,7 +27,7 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import bizo.client.service.CommonService;
 import bizo.client.service.MemberService;
-import bizo.client.service.impl.MemberVo;
+import bizo.common.vo.MemberVo;
 import egovframework.example.sample.service.SampleVO;
 
 /**

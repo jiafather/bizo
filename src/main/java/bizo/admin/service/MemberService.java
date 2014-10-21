@@ -13,36 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package bizo.client.service;
+package bizo.admin.service;
 
 import bizo.common.vo.MemberVo;
-import egovframework.rte.psl.dataaccess.util.EgovMap;
+import bizo.common.vo.ReturnVO;
 
 
 
 public interface MemberService {
 
-	/**
-	 * 멤버가 존재 하는지 id로 조회 한다.
-	 * @param memberVo
-	 * @return 존재하면 1 아니면 0
-	 */
-    int selectIsExistMemberCnt(MemberVo memberVo) throws Exception;
-    
     /**
-     * 맴버를 등록한다.
-     * @param memberVo
-     * @return memberNo
-     * @throws Exception
-     */
-    String insertMember(MemberVo memberVo) throws Exception;
-    
-    /**
-     * 멤버 정보를 얻어 온다.
+     * 회원 목록을 조회한다.
      * @param memberVo
      * @return
      * @throws Exception
      */
-    EgovMap selectMember(MemberVo memberVo) throws Exception;
+	ReturnVO selectMemberList(MemberVo memberVo) throws Exception;
 
 }

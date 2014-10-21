@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package bizo.client.service.impl;
+package bizo.admin.service.impl;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -21,11 +23,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import bizo.client.service.MemberService;
+import bizo.admin.service.MemberService;
 import bizo.common.vo.MemberVo;
+import bizo.common.vo.ReturnVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
-import egovframework.rte.fdl.idgnr.EgovIdGnrService;
-import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * @Class Name : memberDao.java
@@ -43,53 +44,26 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
-@Service("memberService")
+@Service("adminMemberService")
 public class MemberServiceImpl extends EgovAbstractServiceImpl implements MemberService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberServiceImpl.class);
 
-	/** SampleDAO */
-	// TODO ibatis 사용
-//	@Resource(name="memberDao")
-//	private MemberDAO memberDao;
-	
 	// TODO mybatis 사용
-    @Resource(name="memberMapper")
+    @Resource(name="adminMemberMapper")
 	private MemberMapper memberMapper;
 
-    /** ID Generation */
-    @Resource(name="egovIdGnrService")
-    private EgovIdGnrService egovIdGnrService;
-    
-	/**
-	 * 멤버가 존재 하는지 id로 조회 한다.
-	 * @param memberVo
-	 * @return 존재하면 1 아니면 0
-	 */
-    public int selectIsExistMemberCnt(MemberVo memberVo) throws Exception{
-		return memberMapper.selectIsExistMemberCnt(memberVo);
-	}
- 
-	/**
-	 * 멤버를 등록 한다.
-	 * @param memberVo
-	 * @return memberNo
-	 */
-    public String insertMember(MemberVo vo) throws Exception {
-    	LOGGER.debug(vo.toString());
-
-    	/** ID Generation Service */
- //   	String memberNo = egovIdGnrService.getNextStringId();
- // 	vo.setMemberNo(memberNo);
- //   	LOGGER.debug(vo.toString());
-
-    	memberMapper.insertMember(vo);
-        return vo.getMemberNo();
-    }
-
 	@Override
-	public EgovMap selectMember(MemberVo vo) throws Exception {
-		return memberMapper.selectMember(vo);
+	public ReturnVO selectMemberList(MemberVo vo) throws Exception {
+		List list = memberMapper.selectMemberList(vo);
+		Integer totalCount = 0;
+		if(list != null && list.size() > 0)
+			totalCount = (Integer)memberMapper.selectMemberListCnt(vo);
+		
+		ReturnVO rVo = new ReturnVO();
+		rVo.setList(list);
+		rVo.setTotalCount(totalCount);
+		return rVo;	
 	}
 
 }

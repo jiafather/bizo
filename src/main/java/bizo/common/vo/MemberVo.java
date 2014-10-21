@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package bizo.client.service.impl;
+package bizo.common.vo;
 
 import java.io.Serializable;
 
@@ -35,7 +35,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
-public class MemberVo implements Serializable {
+public class MemberVo  extends CommonModel  implements Serializable {
 
 	String memberId;
 	String memberNo;	

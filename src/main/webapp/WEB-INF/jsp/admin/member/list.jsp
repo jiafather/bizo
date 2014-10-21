@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,6 +26,14 @@
 	<link rel="stylesheet" type="text/css" href="js/jquery.codemirror/theme/ambiance.css">
 	<link rel="stylesheet" type="text/css" href="js/jquery.vectormaps/jquery-jvectormap-1.2.2.css"  media="screen"/>
 	<link href="css/style.css" rel="stylesheet" />	
+	<script>
+		function goList(idx){
+			var form = document.form1;
+			form.currentPageIndex.value = idx;
+			form.action = "/admin/member.list.do";
+			form.submit();		
+		}
+	</script>
 </head>
 
 <body class="animated">
@@ -114,7 +124,6 @@
 					<li class="active">회원목록</li>
 				</ol>
 			</div>
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
@@ -136,127 +145,49 @@
 										</tr>
 									</thead>
 									<tbody class="no-border">
+									<c:forEach items="${memberList}" var="member" varStatus="i">									
 										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
+											<td>${memberVo.totalCount - ((memberVo.currentPageIndex - 1) * memberVo.rowSize + i.count - 1) }</td>
+											<td class="text-left"><a href="#">${member.memberId }</a></td>
+											<td class="text-left">${member.memberName }</td>
+											<td class="text-left">${member.mobile1 }-${member.mobile2 }-${member.mobile3 }</td>
+											<td class="text-left">${member.email }</td>
+											<td>${fn:substring(member.insertDatetime, 0, 10) }</td>
+											<td>${fn:substring(member.lastLoginTime, 0, 10) }</td>
 										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td>2014/09/30 08:00:00</td>
-										</tr>
+									</c:forEach>										
 									</tbody>
 								</table>
 								<ul class="pagination">
-								  <li class="disabled"><a href="#">이전</a></li>
-								  <li class="active"><a href="#">1</a></li>
-								  <li><a href="#">2</a></li>
-								  <li><a href="#">3</a></li>
-								  <li><a href="#">4</a></li>
-								  <li><a href="#">5</a></li>
-								  <li><a href="#">다음</a></li>
+									<!-- 페이징 변수 셋팅 -->
+									<c:set var="currentPageIndex" value="${memberVo.currentPageIndex}" />
+									<c:set var="rowSize" value="${memberVo.rowSize}" />
+									<c:set var="pageGroupSize" value="${memberVo.pageGroupSize}" />
+									<c:set var="totPageSize" value="${memberVo.totPageSize}" />
+									<%@ include file="../include/paging.jsp" %>		
 								</ul>
 							</div>
 						</div>
 					</div>
 
 					<div class="block-flat">
-							<form class="form-horizontal group-border-dashed" action="#" style="border-radius: 0px;">
+							<form name="form1" method="post" class="form-horizontal group-border-dashed" action="#" style="border-radius: 0px;">
+								<input type="hidden" name="cmd" value="" />
+								<input type="hidden" name="currentPageIndex" value="${memberVo.currentPageIndex }" />							
 								<div class="form-group">
 									<label class="col-sm-2 control-label">회원 검색하기</label>
 									<div class="col-sm-2">
-										<select class="form-control">
-											<option>이름</option>
-											<option>아이디</option>
-											<option>이메일</option>
+										<select name="searchType" id="searchType" class="form-control">
+											<option value="1" ${ (memberVo.searchType == "1")?' selected':''}>이름</option>
+											<option value="2" ${ (memberVo.searchType == "2")?' selected':''}>아이디</option>
+											<option value="3" ${ (memberVo.searchType == "3")?' selected':''}>이메일</option>
 										</select>
 									</div>
 									<div class="col-sm-6">
 										<input type="text" class="form-control">
 									</div>									
 									<div class="col-sm-2">
-										<button type="button" class="btn btn-dark btn-flat"><i class="fa fa-search"></i> 검색</button>
+										<button type="button" class="btn btn-dark btn-flat" onclick="goList(1);"><i class="fa fa-search"></i> 검색</button>
 									</div>
 								</div>
 							</form>
@@ -266,7 +197,6 @@
 		</div>
 	</div>
 </div>
-
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right side-chat">
 	<div class="header">
 		<h3>LOG</h3>

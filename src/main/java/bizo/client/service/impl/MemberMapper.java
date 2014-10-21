@@ -15,6 +15,7 @@
  */
 package bizo.client.service.impl;
 
+import bizo.common.vo.MemberVo;
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 

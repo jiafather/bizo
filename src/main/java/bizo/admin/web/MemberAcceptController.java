@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import bizo.client.service.impl.MemberVo;
+import bizo.common.vo.MemberVo;
 import egovframework.example.sample.service.SampleVO;
 
 /**
