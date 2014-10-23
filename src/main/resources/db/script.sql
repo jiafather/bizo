@@ -3,7 +3,7 @@ CREATE SCHEMA `mydb` CHARACTER SET utf8 COLLATE utf8_general_ci;
 /* 난 그냥 root 사용 중 -- root 도 권한추가를 해야 했던가 ㅡㅡ;
 GRANT ALL ON `mydb`.* TO `userid`@localhost IDENTIFIED BY '1234';
 FLUSH PRIVILEGES;
-*/
+*/  
 
 CREATE TABLE mydb.CODE_MST (
    MAJOR_ID VARCHAR(10) COMMENT '코드그룹ID',
