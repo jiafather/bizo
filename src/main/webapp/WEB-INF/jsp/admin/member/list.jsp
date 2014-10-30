@@ -155,7 +155,12 @@
 											<td>${fn:substring(member.insertDatetime, 0, 10) }</td>
 											<td>${fn:substring(member.lastLoginTime, 0, 10) }</td>
 										</tr>
-									</c:forEach>										
+									</c:forEach>
+									<c:if test="${fn:length(memberList) == 0 }">
+										<tr>
+											<td colspan="7">데이타가 없습니다.</td>
+										</tr>
+									</c:if>									
 									</tbody>
 								</table>
 								<ul class="pagination">
@@ -172,7 +177,6 @@
 
 					<div class="block-flat">
 							<form name="form1" method="post" class="form-horizontal group-border-dashed" action="#" style="border-radius: 0px;">
-								<input type="hidden" name="cmd" value="" />
 								<input type="hidden" name="currentPageIndex" value="${memberVo.currentPageIndex }" />							
 								<div class="form-group">
 									<label class="col-sm-2 control-label">회원 검색하기</label>
@@ -184,7 +188,7 @@
 										</select>
 									</div>
 									<div class="col-sm-6">
-										<input type="text" class="form-control">
+										<input type="text" name="searchText" class="form-control" value="${ memberVo.searchText}">
 									</div>									
 									<div class="col-sm-2">
 										<button type="button" class="btn btn-dark btn-flat" onclick="goList(1);"><i class="fa fa-search"></i> 검색</button>

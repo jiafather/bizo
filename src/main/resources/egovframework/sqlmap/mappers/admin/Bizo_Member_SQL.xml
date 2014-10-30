@@ -5,20 +5,44 @@
 	<select id="selectMemberList" parameterType="memberVo" resultType="egovMap">
 		<![CDATA[			
 			SELECT 
-				*
-			FROM MEMBER
+				A.*,
+				CASE STATE  
+			        WHEN 'S' THEN '대기'
+			        WHEN 'Y' THEN '승인'
+			        WHEN 'N' THEN '보류' 
+			        ELSE '대기'
+			    END AS STATE_NM
+			FROM MEMBER A
 			WHERE 1=1
-			ORDER BY MEMBER_NO DESC
 		]]>
+		<if test="searchText != null">
+			<if test="searchType == 1">
+				AND MEMBER_NAME = #{searchText}
+			</if>	
+			<if test="searchType == 2">
+				AND MEMBER_ID = #{searchText}
+			</if>	
+			<if test="searchType == 3">
+				AND EMAIL = #{searchText}
+			</if>	
+		</if>	
+			ORDER BY MEMBER_NO DESC
 		<if test="startIdx != null">
 			LIMIT #{startIdx}, #{endIdx}
 		</if>	
 	</select>
+	
 	<select id="selectMemberListCnt" parameterType="memberVo" resultType="int">
 		<![CDATA[	
 			SELECT
 				COUNT(MEMBER_ID)AS totCnt
 			FROM MEMBER
 		]]>      
-	</select>	
+	</select>
+	
+	<update id="acceptMember">
+		UPDATE MEMBER SET STATE = #{state} 
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 </mapper>

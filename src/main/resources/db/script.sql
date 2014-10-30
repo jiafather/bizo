@@ -1,9 +1,9 @@
 CREATE SCHEMA `mydb` CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-/* 난 그냥 root 사용 중 -- root 도 권한추가를 해야 했던가 ㅡㅡ;*/
+/* 난 그냥 root 사용 중 -- root 도 권한추가를 해야 했던가 ㅡㅡ;
 GRANT ALL ON `mydb`.* TO `userid`@localhost IDENTIFIED BY '1234';
 FLUSH PRIVILEGES;
-
+*/
 
 CREATE TABLE mydb.CODE_MST (
    MAJOR_ID VARCHAR(10) COMMENT '코드그룹ID',
@@ -98,18 +98,7 @@ CREATE TABLE mydb.MEMBER (
 
 
 
-CREATE TABLE SAMPLE(ID VARCHAR(16) NOT NULL PRIMARY KEY,NAME VARCHAR(50),DESCRIPTION VARCHAR(100),USE_YN CHAR(1),REG_USER VARCHAR(10));
-
-CREATE TABLE IDS(TABLE_NAME VARCHAR(16) NOT NULL PRIMARY KEY,NEXT_ID DECIMAL(30) NOT NULL);
-
-INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00001','Runtime Environment','Foundation Layer','Y','eGov');
-INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00002','Runtime Environment','Persistence Layer','Y','eGov');
-INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00003','Runtime Environment','Presentation Layer','Y','eGov');
-INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00004','Runtime Environment','Business Layer','Y','eGov');
-INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00005','Runtime Environment','Batch Layer','Y','eGov');
-INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00006','Runtime Environment','Integration Layer','Y','eGov');
-INSERT INTO mydb.IDS VALUES('MEMBER',10000);
-
+---------------------------------------------------------------------------------------------
 
 
 CREATE TABLE mydb.IDS (
@@ -127,3 +116,57 @@ CREATE TABLE mydb.SAMPLE (
    REG_USER VARCHAR(10) COMMENT '등록자ID',
    PRIMARY KEY (ID)
 ) ENGINE = MyISAM COMMENT = '샘플테이블' ROW_FORMAT = DEFAULT;
+
+INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00001','Runtime Environment','Foundation Layer','Y','eGov');
+INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00002','Runtime Environment','Persistence Layer','Y','eGov');
+INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00003','Runtime Environment','Presentation Layer','Y','eGov');
+INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00004','Runtime Environment','Business Layer','Y','eGov');
+INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00005','Runtime Environment','Batch Layer','Y','eGov');
+INSERT INTO mydb.SAMPLE VALUES('SAMPLE-00006','Runtime Environment','Integration Layer','Y','eGov');
+INSERT INTO mydb.IDS VALUES('MEMBER',10000);
+
+
+----------------------------------------------------------------------------------------------
+
+
+INSERT INTO `mydb`.`company`
+(`COMP_CODE`,`COMP_NAME`,`SORT_SEQ`,`COMP_TYPE`,`USE_YN`,`INSERT_DATE`,`INSERT_ID`,`MODIFY_DATE`,`MODIFY_ID`)
+VALUES
+('C003',
+'유토피아',
+3,
+'',
+'Y',
+now(),
+'',
+now(),
+'');
+
+
+INSERT INTO `mydb`.`agent`(`COMP_CODE`,`AGT_CODE`,`AGT_NAME`,`SORT_SEQ`,`AGT_TYPE`,`USE_YN`,`INSERT_DATE`,`INSERT_ID`,`MODIFY_DATE`,`MODIFY_ID`)
+VALUES
+('C001',
+'A001',
+'에이전트1',
+1,
+'01',
+'Y',
+now(),
+'lgslgs',
+now(),
+'lgslgs');
+
+
+INSERT INTO `mydb`.`agent`(`COMP_CODE`,`AGT_CODE`,`AGT_NAME`,`SORT_SEQ`,`AGT_TYPE`,`USE_YN`,`INSERT_DATE`,`INSERT_ID`,`MODIFY_DATE`,`MODIFY_ID`)
+VALUES
+('C003',
+'A008',
+'에이전트2',
+2,
+'01',
+'Y',
+now(),
+'lgslgs',
+now(),
+'lgslgs');
+

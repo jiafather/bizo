@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +25,15 @@
 	<link rel="stylesheet" type="text/css" href="js/jquery.codemirror/lib/codemirror.css">
 	<link rel="stylesheet" type="text/css" href="js/jquery.codemirror/theme/ambiance.css">
 	<link rel="stylesheet" type="text/css" href="js/jquery.vectormaps/jquery-jvectormap-1.2.2.css"  media="screen"/>
-	<link href="css/style.css" rel="stylesheet" />	
+	<link href="css/style.css" rel="stylesheet" />
+	<script>
+		function goList(idx){
+			var form = document.form1;
+			form.currentPageIndex.value = idx;
+			form.action = "/admin/member.acceptList.do";
+			form.submit();		
+		}
+	</script>	
 </head>
 
 <body class="animated">
@@ -127,6 +137,7 @@
 									<thead class="no-border">
 										<tr>
 											<th class="text-center">번호</th>
+											<th class="text-center">상태</th>
 											<th class="text-center">아이디</th>
 											<th class="text-center">이름</th>
 											<th class="text-center">연락처</th>
@@ -136,62 +147,38 @@
 										</tr>
 									</thead>
 									<tbody class="no-border">
+									<c:forEach items="${memberList}" var="member" varStatus="i">									
 										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">승인</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">보류</button></td>
+											<td>${memberVo.totalCount - ((memberVo.currentPageIndex - 1) * memberVo.rowSize + i.count - 1) }</td>
+											<td><font color="red">${member.stateNm}</font></td>
+											<td class="text-left"><a href="#">${member.memberId }</a></td>
+											<td class="text-left">${member.memberName }</td>
+											<td class="text-left">${member.mobile1 }-${member.mobile2 }-${member.mobile3 }</td>
+											<td class="text-left">${member.email }</td>
+											<td>${fn:substring(member.insertDatetime, 0, 10) }</td>
+											<td><button type="button" id="btnAccept"  onclick="accept(${member.memberNo}, 1);" class="btn btn-trans btn-success btn-rad btn-xs">승인</button><button type="button" onclick="accept(${member.memberNo}, 2);"  id="btnDefer" class="btn btn-trans btn-danger btn-rad btn-xs">보류</button></td>
 										</tr>
+									</c:forEach>
+									<c:if test="${fn:length(memberList) == 0 }">
 										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">승인</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">보류</button></td>
+											<td colspan="8">데이타가 없습니다.</td>
 										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">승인</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">보류</button></td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">승인</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">보류</button></td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">승인</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">보류</button></td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>010-9999-7777</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">승인</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">보류</button></td>
-										</tr>
+									</c:if>
 									</tbody>
 								</table>
+								<form name="form1" id="form1" method="post" class="form-horizontal group-border-dashed" action="#" style="border-radius: 0px;">
+									<input type="hidden" name="memberNo" id="memberNo" value="" />
+									<input type="hidden" name="state" id="state" value="" />
+									<input type="hidden" name="currentPageIndex" value="${memberVo.currentPageIndex }" />								
+								<ul class="pagination">
+									<!-- 페이징 변수 셋팅 -->
+									<c:set var="currentPageIndex" value="${memberVo.currentPageIndex}" />
+									<c:set var="rowSize" value="${memberVo.rowSize}" />
+									<c:set var="pageGroupSize" value="${memberVo.pageGroupSize}" />
+									<c:set var="totPageSize" value="${memberVo.totPageSize}" />
+									<%@ include file="../include/paging.jsp" %>
+								</ul>								
+									</form>
 							</div>
 							<div class="spacer spacer-bottom text-center">
 								<button type="button" class="btn btn-success btn-flat"><i class="fa fa-check"></i> 전체 승인하기</button>
@@ -259,4 +246,31 @@
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.pie.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.resize.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.labels.js"></script>
+<script>
+// 		$(function() {
+		
+		function accept(memberNo, idx){
+			$("#memberNo").val(memberNo);
+			if(idx==1){
+				$("#state").val("Y");//승인
+			}else{
+				$("#state").val("N");//보류
+			}
+			
+			$.post( "/admin/member.accept.do", $( "#form1" ).serialize()).done(function( data ) {
+				if(data.isok=="ok"){
+					if(idx==1)
+						alert("승인 처리 되었습니다.");
+					else
+						alert("보류 처리 되었습니다.");
+				}else{
+					if(idx==1)
+						alert("승인 처리 중 오류가 발생 하였습니다.");
+					else
+						alert("보류 처리 중 오류가 발생 하였습니다.");
+				}
+				location.reload();
+		  	});
+		}
+	</script>
 </body>

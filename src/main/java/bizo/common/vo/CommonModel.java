@@ -8,6 +8,7 @@ public class CommonModel {
 	//기본 검색관련 변수
 	private String dateType;//날짜타입?
 	private String searchType;//검색타입
+	private String searchText;//검색내용
 	private String processKind;//업무성격
 	private String startDate;//시작일
 	private String endDate;//종료일
@@ -48,6 +49,12 @@ public class CommonModel {
 	}
 	public void setProcessKind(String processKind) {
 		this.processKind = processKind;
+	}
+	public String getSearchText() {
+		return searchText;
+	}
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
 	}
 	public String getStartDate() {
 		return startDate;

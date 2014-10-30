@@ -30,4 +30,12 @@ public interface MemberService {
      */
 	ReturnVO selectMemberList(MemberVo memberVo) throws Exception;
 
+	/**
+	 * 회원을 승인 또는 반려 한다.
+	 * @param memberVo
+	 * @return
+	 * @throws Exception
+	 */
+	int acceptMember(MemberVo memberVo) throws Exception;
+
 }

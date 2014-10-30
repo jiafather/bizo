@@ -40,5 +40,6 @@ public interface MemberMapper {
 	
 	int selectMemberListCnt(MemberVo memberVo) throws Exception;
     List<?> selectMemberList(MemberVo memberVo) throws Exception;
+	int acceptMember(MemberVo memberVo) throws Exception;
 
 }

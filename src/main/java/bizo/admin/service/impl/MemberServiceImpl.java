@@ -66,4 +66,15 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
 		return rVo;	
 	}
 
+	/**
+	 * 회원을 승인 또는 반려 한다.
+	 * @param memberVo
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public int acceptMember(MemberVo memberVo) throws Exception {
+		return memberMapper.acceptMember(memberVo);
+	}
+
 }

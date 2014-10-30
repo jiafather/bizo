@@ -48,7 +48,9 @@ public class MemberVo  extends CommonModel  implements Serializable {
 	String addr2;		
 	String mobile1;		
 	String mobile2;		
-	String mobile3;		
+	String mobile3;
+	String state;
+	String stateNm;
 	String email;		
 	String emailYn = "N";	
 	String smsServiceYn = "N";	
@@ -159,6 +161,22 @@ public class MemberVo  extends CommonModel  implements Serializable {
 
 	public void setMobile3(String mobile3) {
 		this.mobile3 = mobile3;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	public String getStateNm() {
+		return stateNm;
+	}
+	
+	public void setStateNm(String stateNm) {
+		this.stateNm = stateNm;
 	}
 
 	public String getEmail() {
