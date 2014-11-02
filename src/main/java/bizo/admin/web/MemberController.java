@@ -20,15 +20,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.OrderedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import bizo.admin.service.MemberService;
 import bizo.common.vo.MemberVo;
 import egovframework.example.sample.service.SampleVO;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
+import egovframework.rte.ptl.mvc.bind.annotation.CommandMap;
 
 /**
  * @Class Name : MemberController.java
@@ -84,7 +88,11 @@ public class MemberController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/admin/member.detail.do")
-	public String goMemberDetail(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
+	public String goMemberDetail(@RequestParam(value="memberNo", required=true) String memberNo,  @ModelAttribute("memberVo") MemberVo vo, ModelMap model) throws Exception {
+		EgovMap memberVo = memberService.selectMember(vo);
+		
+		//memberNo
+		model.addAttribute("memberVo", memberVo);
 		return "admin/member/detail";
 	}
 	

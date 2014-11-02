@@ -19,6 +19,8 @@ import java.util.List;
 
 import bizo.common.vo.MemberVo;
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
+import egovframework.rte.ptl.mvc.bind.annotation.CommandMap;
 
 /**
  * MEMBER에 관한 데이터처리 매퍼 클래스
@@ -38,8 +40,9 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 @Mapper("adminMemberMapper")
 public interface MemberMapper {
 	
+	
 	int selectMemberListCnt(MemberVo memberVo) throws Exception;
     List<?> selectMemberList(MemberVo memberVo) throws Exception;
 	int acceptMember(MemberVo memberVo) throws Exception;
-
+	EgovMap selectMember(MemberVo memberVo) throws Exception;
 }

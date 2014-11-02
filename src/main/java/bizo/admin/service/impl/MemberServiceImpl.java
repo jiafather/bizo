@@ -27,6 +27,8 @@ import bizo.admin.service.MemberService;
 import bizo.common.vo.MemberVo;
 import bizo.common.vo.ReturnVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
+import egovframework.rte.ptl.mvc.bind.annotation.CommandMap;
 
 /**
  * @Class Name : memberDao.java
@@ -77,4 +79,14 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
 		return memberMapper.acceptMember(memberVo);
 	}
 
+	/**
+	 * 회원을 조회 한다.
+	 * @param memberVo
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public EgovMap selectMember(MemberVo memberVo) throws Exception {
+		return memberMapper.selectMember(memberVo);
+	}
 }

@@ -15,7 +15,7 @@
 			FROM MEMBER A
 			WHERE 1=1
 		]]>
-		<if test="searchText != null">
+		<if test="searchText != null and searchText != '' ">
 			<if test="searchType == 1">
 				AND MEMBER_NAME = #{searchText}
 			</if>	
@@ -39,6 +39,21 @@
 			FROM MEMBER
 		]]>      
 	</select>
+	
+	<select id="selectMember" parameterType="memberVo" resultType="egovMap">
+		<![CDATA[	
+			SELECT 
+				A.*,
+				CASE STATE  
+			        WHEN 'S' THEN '대기'
+			        WHEN 'Y' THEN '승인'
+			        WHEN 'N' THEN '보류' 
+			        ELSE '대기'
+			    END AS STATE_NM
+			FROM MEMBER A
+			WHERE MEMBER_NO = #{memberNo}
+		]]>      
+	</select>	
 	
 	<update id="acceptMember">
 		UPDATE MEMBER SET STATE = #{state} 

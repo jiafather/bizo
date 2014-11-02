@@ -33,6 +33,13 @@
 			form.action = "/admin/member.list.do";
 			form.submit();		
 		}
+		
+		function goDetail(memberNo){
+			var form = document.form1;
+			form.memberNo.value = memberNo;
+			form.action = "/admin/member.detail.do";
+			form.submit();	
+		}
 	</script>
 </head>
 
@@ -148,7 +155,7 @@
 									<c:forEach items="${memberList}" var="member" varStatus="i">									
 										<tr>
 											<td>${memberVo.totalCount - ((memberVo.currentPageIndex - 1) * memberVo.rowSize + i.count - 1) }</td>
-											<td class="text-left"><a href="#">${member.memberId }</a></td>
+											<td class="text-left"><a href="javascript:goDetail('${member.memberNo }');">${member.memberId }</a></td>
 											<td class="text-left">${member.memberName }</td>
 											<td class="text-left">${member.mobile1 }-${member.mobile2 }-${member.mobile3 }</td>
 											<td class="text-left">${member.email }</td>
@@ -177,11 +184,13 @@
 
 					<div class="block-flat">
 							<form name="form1" method="post" class="form-horizontal group-border-dashed" action="#" style="border-radius: 0px;">
+								<input type="hidden" name="memberNo" id="memberNo" value="" />							
 								<input type="hidden" name="currentPageIndex" value="${memberVo.currentPageIndex }" />							
 								<div class="form-group">
 									<label class="col-sm-2 control-label">회원 검색하기</label>
 									<div class="col-sm-2">
 										<select name="searchType" id="searchType" class="form-control">
+											<option value="0" ${ (memberVo.searchType == "0")?' selected':''}>선택</option>
 											<option value="1" ${ (memberVo.searchType == "1")?' selected':''}>이름</option>
 											<option value="2" ${ (memberVo.searchType == "2")?' selected':''}>아이디</option>
 											<option value="3" ${ (memberVo.searchType == "3")?' selected':''}>이메일</option>

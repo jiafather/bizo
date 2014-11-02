@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -126,39 +128,39 @@
 								<tbody class="no-border-y no-border-x">
 									<tr>
 										<td>이름</td>
-										<td>홍길동</td>
+										<td>${memberVo.memberName }</td>
 									</tr>
 									<tr>
 										<td>아이디</td>
-										<td>admin</td>
+										<td>${memberVo.memberId }</td>
 									</tr>
 									<tr>
 										<td>닉네임</td>
-										<td>비즈오몰 관리자</td>
+										<td>${memberVo.nickname }</td>
 									</tr>
 									<tr>
 										<td>생년월일</td>
-										<td>2000/01/15</td>
+										<td>${fn:substring(memberVo.birthday, 0, 10) }</td>
 									</tr>
 									<tr>
 										<td>우편번호</td>
-										<td>430-080</td>
+										<td>${memberVo.post }</td>
 									</tr>
 									<tr>
 										<td>주소</td>
-										<td>경기도 안양시 만안구 석수2동</td>
+										<td>${memberVo.addr1 }</td>
 									</tr>
 									<tr>
 										<td>상세주소</td>
-										<td>두산위브 112동 1102호</td>
+										<td>${memberVo.addr2 }</td>
 									</tr>
 									<tr>
 										<td>핸드폰</td>
-										<td>010-8888-9999</td>
+										<td>${memberVo.mobile1 }-${memberVo.mobile2 }-${memberVo.mobile3 }</td>
 									</tr>
 									<tr>
 										<td>이메일</td>
-										<td>administrator@bizo.co.kr</td>
+										<td>${memberVo.email }</td>
 									</tr>
 								</tbody>
 							</table>
@@ -175,39 +177,64 @@
 								<tbody class="no-border-y no-border-x">
 									<tr>
 										<td>회원번호</td>
-										<td>119119</td>
+										<td>${memberVo.memberNo }</td>
 									</tr>
 									<tr>
 										<td>이메일수신</td>
-										<td><span class="label label-success">Y</span></td>
+										<td>
+											<c:choose>
+												<c:when test="${memberVo.emailYn eq 'Y' }">
+													<span class="label label-success">Y</span></td>
+												</c:when>
+												<c:otherwise>
+													<span class="label label-danger">N</span>
+												</c:otherwise>
+											</c:choose>									
 									</tr>
 									<tr>
 										<td>sns수신</td>
-										<td><span class="label label-success">Y</span></td>
+										<td>
+											<c:choose>
+												<c:when test="${memberVo.smsServiceYn eq 'Y' }">
+													<span class="label label-success">Y</span></td>
+												</c:when>
+												<c:otherwise>
+													<span class="label label-danger">N</span>
+												</c:otherwise>
+											</c:choose>											
 									</tr>
 									<tr>
 										<td>실명인증</td>
-										<td><span class="label label-danger">N</span></td>
+										<td>
+											<c:choose>
+												<c:when test="${memberVo.ownNameYn eq 'Y' }">
+													<span class="label label-success">Y</span></td>
+												</c:when>
+												<c:otherwise>
+													<span class="label label-danger">N</span>
+												</c:otherwise>
+											</c:choose>
+										</td>
 									</tr>
 									<tr>
 										<td>핸드폰 통신사</td>
-										<td>SKT</td>
+										<td>${memberVo.mobileCom }</td>
 									</tr>
 									<tr>
 										<td>최종 로그인</td>
-										<td>2014/08/30</td>
+										<td>${memberVo.lastLoginTime }</td>
 									</tr>
 									<tr>
 										<td>등록일시</td>
-										<td>2014/09/09</td>
+										<td>${memberVo.insertDateTime }</td>
 									</tr>
 									<tr>
 										<td>수정일시</td>
-										<td>2014/09/09</td>
+										<td>${memberVo.updateDateTime }</td>
 									</tr>
 									<tr>
 										<td>등록자</td>
-										<td>admin</td>
+										<td>${memberVo.insertId }</td>
 									</tr>
 								</tbody>
 							</table>

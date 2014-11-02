@@ -15,6 +15,11 @@
  */
 package bizo.admin.service;
 
+import org.apache.commons.collections.OrderedMap;
+
+import egovframework.example.sample.service.SampleVO;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
+import egovframework.rte.ptl.mvc.bind.annotation.CommandMap;
 import bizo.common.vo.MemberVo;
 import bizo.common.vo.ReturnVO;
 
@@ -38,4 +43,13 @@ public interface MemberService {
 	 */
 	int acceptMember(MemberVo memberVo) throws Exception;
 
+	/**
+	 * 회원 정보를 리턴한다.
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	EgovMap selectMember(MemberVo memberVo) throws Exception;
+	
+	
 }
