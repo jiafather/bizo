@@ -51,5 +51,12 @@ public interface MemberService {
 	 */
 	EgovMap selectMember(MemberVo memberVo) throws Exception;
 	
+	/**
+	 * 회원을 삭제 한다.
+	 * @param memberVo
+	 * @return
+	 * @throws Exception
+	 */
+	int deleteMember(MemberVo memberVo) throws Exception;
 	
 }

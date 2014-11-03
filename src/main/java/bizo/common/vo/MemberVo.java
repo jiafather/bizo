@@ -63,9 +63,10 @@ public class MemberVo  extends CommonModel  implements Serializable {
 	String insertId;	
 	String updateDatetime;	
 	String modifyId;	
-	String useFlag;	
+	String useFlag="Y";	
 	String compCode;	
 	String agtCode;
+	String quitTime;
 
     public String getMemberId() {
 		return memberId;
@@ -303,4 +304,12 @@ public class MemberVo  extends CommonModel  implements Serializable {
         return ToStringBuilder.reflectionToString(this);
     }
 
+	public String getQuitTime() {
+		return quitTime;
+	}
+
+	public void setQuitTime(String quitTime) {
+		this.quitTime = quitTime;
+	}
+	
 }

@@ -242,7 +242,7 @@
 					</div>					
 				</div>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-dark btn-flat"><i class="fa fa-angle-left"></i> 돌아가기</button> <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i> 삭제하기</button>
+					<button type="button" id="btnBack" class="btn btn-dark btn-flat"><i class="fa fa-angle-left"></i> 돌아가기</button> <button type="button" id="btnDelete" class="btn btn-danger btn-flat"><i class="fa fa-times"></i> 삭제하기</button>
 				</div>
 			</div>
 		</div>
@@ -304,4 +304,26 @@
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.pie.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.resize.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.labels.js"></script>
+<script>
+	//회원을 삭제한다.
+	$("#btnDelete").click(function(){
+		personObj=new Object();
+		personObj.memberNo="${memberVo.memberNo}";
+		if(!confirm("삭제 하시겠습니까?"))
+			return;
+			
+		$.post( "/admin/member.delete.do", $.param(personObj)).done(function( data ) {
+			if(data.isok=="ok"){
+					alert("정상적으로 삭제 되었습니다.");
+					location.href = "/admin/member.list.do";
+			}else{
+					alert("회원 삭제중 오류가 있습니다.");
+			}
+		 });
+	});
+	
+	$("#btnBack").click(function(){
+		history.back();
+	});
+</script>
 </body>

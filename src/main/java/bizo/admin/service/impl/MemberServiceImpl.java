@@ -89,4 +89,15 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
 	public EgovMap selectMember(MemberVo memberVo) throws Exception {
 		return memberMapper.selectMember(memberVo);
 	}
+
+	/**
+	 * 회원 정보를 삭제 한다.
+	 * @param memberVo
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public int deleteMember(MemberVo memberVo) throws Exception {
+		return memberMapper.deleteMember(memberVo);
+	}
 }

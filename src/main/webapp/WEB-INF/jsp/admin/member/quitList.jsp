@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +25,16 @@
 	<link rel="stylesheet" type="text/css" href="js/jquery.codemirror/lib/codemirror.css">
 	<link rel="stylesheet" type="text/css" href="js/jquery.codemirror/theme/ambiance.css">
 	<link rel="stylesheet" type="text/css" href="js/jquery.vectormaps/jquery-jvectormap-1.2.2.css"  media="screen"/>
-	<link href="css/style.css" rel="stylesheet" />	
+	<link href="css/style.css" rel="stylesheet" />
+	<script>
+		function goList(idx){
+			var form = document.form1;
+			form.currentPageIndex.value = idx;
+			form.action = "/admin/member.quitList.do";
+			form.submit();		
+		}
+		
+	</script>
 </head>
 
 <body class="animated">
@@ -137,77 +148,56 @@
 										</tr>
 									</thead>
 									<tbody class="no-border">
+									<c:forEach items="${memberList}" var="member" varStatus="i">									
 										<tr>
-											<td>2014/09/30 08:00:00</td>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td class="color-danger">별로임</td>
-											<td class="color-danger">본인</td>
+											<td>${memberVo.totalCount - ((memberVo.currentPageIndex - 1) * memberVo.rowSize + i.count - 1) }</td>
+											<td><font color="red">${fn:substring(member.quitTime, 0, 10) }</font></td>
+											<td class="text-left"><a href="#">${member.memberId }</a></td>
+											<td class="text-left">${member.memberName }</td>
+											<td class="text-left">${member.email }</td>
+											<td class="text-left">${fn:substring(member.insertDatetime, 0, 10) }</td>
+											<td>사유</td>
+											<td><button type="button" onclick="returnMember(${member.memberNo});" class="btn btn-trans btn-success btn-rad btn-xs">복귀</button></td>
 										</tr>
+									</c:forEach>
+									<c:if test="${fn:length(memberList) == 0 }">
 										<tr>
-											<td>2014/09/30 08:00:00</td>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td class="color-danger">욕설</td>
-											<td class="color-danger">admin</td>
+											<td colspan="8">데이타가 없습니다.</td>
 										</tr>
-										<tr>
-											<td>2014/09/30 08:00:00</td>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td class="color-danger">해킹</td>
-											<td class="color-danger">root</td>
-										</tr>
-										<tr>
-											<td>2014/09/30 08:00:00</td>
-											<td>1</td>
-											<td><a href="#">admin</a></td>
-											<td>관리자</td>
-											<td>admin@bizo.co.kr</td>
-											<td>2014/09/30</td>
-											<td class="color-danger">도배글</td>
-											<td class="color-danger">man</td>
-										</tr>
+									</c:if>
 									</tbody>
 								</table>
 								<ul class="pagination">
-								  <li class="disabled"><a href="#">이전</a></li>
-								  <li class="active"><a href="#">1</a></li>
-								  <li><a href="#">2</a></li>
-								  <li><a href="#">3</a></li>
-								  <li><a href="#">4</a></li>
-								  <li><a href="#">5</a></li>
-								  <li><a href="#">다음</a></li>
+									<!-- 페이징 변수 셋팅 -->
+									<c:set var="currentPageIndex" value="${memberVo.currentPageIndex}" />
+									<c:set var="rowSize" value="${memberVo.rowSize}" />
+									<c:set var="pageGroupSize" value="${memberVo.pageGroupSize}" />
+									<c:set var="totPageSize" value="${memberVo.totPageSize}" />
+									<%@ include file="../include/paging.jsp" %>		
 								</ul>
 							</div>
 						</div>
 					</div>
 
 					<div class="block-flat">
-							<form class="form-horizontal group-border-dashed" action="#" style="border-radius: 0px;">
+							<form name="form1" method="post" class="form-horizontal group-border-dashed" action="#" style="border-radius: 0px;">
+								<input type="hidden" name="memberNo" id="memberNo" value="" />							
+								<input type="hidden" name="currentPageIndex" value="${memberVo.currentPageIndex }" />							
 								<div class="form-group">
 									<label class="col-sm-2 control-label">회원 검색하기</label>
 									<div class="col-sm-2">
-										<select class="form-control">
-											<option>이름</option>
-											<option>아이디</option>
-											<option>이메일</option>
-										</select>
+										<select name="searchType" id="searchType" class="form-control">
+											<option value="0" ${ (memberVo.searchType == "0")?' selected':''}>선택</option>
+											<option value="1" ${ (memberVo.searchType == "1")?' selected':''}>이름</option>
+											<option value="2" ${ (memberVo.searchType == "2")?' selected':''}>아이디</option>
+											<option value="3" ${ (memberVo.searchType == "3")?' selected':''}>이메일</option>
+										</select></select>
 									</div>
 									<div class="col-sm-6">
-										<input type="text" class="form-control">
+										<input type="text" name="searchText" class="form-control" value="${ memberVo.searchText}">
 									</div>									
 									<div class="col-sm-2">
-										<button type="button" class="btn btn-dark btn-flat"><i class="fa fa-search"></i> 검색</button>
+										<button type="button" class="btn btn-dark btn-flat" onclick="goList(1);"><i class="fa fa-search"></i> 검색</button>
 									</div>
 								</div>
 							</form>
@@ -273,4 +263,22 @@
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.pie.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.resize.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.labels.js"></script>
+<script>
+	//회원을 복귀 시킨다.
+	function returnMember(memberNo){
+		personObj=new Object();
+		personObj.memberNo=memberNo;
+		if(!confirm("회원을 복귀 하시겠습니까?"))
+			return;
+			
+		$.post( "/admin/member.returnmember.do", $.param(personObj)).done(function( data ) {
+			if(data.isok=="ok"){
+				alert("정상적으로 복귀 되었습니다.");
+				location.href = "/admin/member.quitList.do";
+			}else{
+				alert("회원 복귀중 오류가 발생 하였습니다.");
+			}
+		 });
+	}
+</script>
 </body>
