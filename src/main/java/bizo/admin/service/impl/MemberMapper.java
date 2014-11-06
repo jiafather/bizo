@@ -20,7 +20,7 @@ import java.util.List;
 import bizo.common.vo.MemberVo;
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
-
+ 
 /**
  * MEMBER에 관한 데이터처리 매퍼 클래스
  *

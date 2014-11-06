@@ -33,7 +33,7 @@
 			form.action = "/admin/member.list.do";
 			form.submit();		
 		}
-		
+		 
 		function goDetail(memberNo){
 			var form = document.form1;
 			form.memberNo.value = memberNo;

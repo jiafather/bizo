@@ -49,7 +49,7 @@ public class MemberVo  extends CommonModel  implements Serializable {
 	String mobile1;		
 	String mobile2;		
 	String mobile3;
-	String state;
+	String state; 
 	String stateNm;
 	String email;		
 	String emailYn = "N";	

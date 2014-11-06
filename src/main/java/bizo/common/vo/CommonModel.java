@@ -12,7 +12,7 @@ public class CommonModel {
 	private String processKind;//업무성격
 	private String startDate;//시작일
 	private String endDate;//종료일
-	
+	 
 	//등록, 수정자 이름
 	private String regUserName;
 	private String uptUserName;
