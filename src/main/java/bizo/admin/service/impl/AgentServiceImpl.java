@@ -83,4 +83,9 @@ public class AgentServiceImpl extends EgovAbstractServiceImpl implements AgentSe
 		return rVo;	
 	}
 
+	@Override
+	public int deleteCompany(CompanyVo companyVo) throws Exception {
+		return agentMapper.deleteCompany(companyVo);
+	}
+
 }

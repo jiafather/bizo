@@ -31,5 +31,6 @@ public interface AgentService {
      */
 	ReturnVO selectCompanyList(CompanyVo companyVo) throws Exception;
 	ReturnVO selectAgentList(AgentVo agentVo) throws Exception;
+	int deleteCompany(CompanyVo companyVo) throws Exception;
 
 }

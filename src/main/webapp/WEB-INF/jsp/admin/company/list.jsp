@@ -129,7 +129,7 @@
 										<tr>
 											<th class="text-center">코드</th>
 											<th class="text-center">이름</th>
-											<th class="text-center">타입</th>
+<!-- 											<th class="text-center">타입</th> -->
 											<th class="text-center">대리점수</th>
 											<th class="text-center">등록일</th>
 											<th class="text-center">등록자</th>
@@ -143,13 +143,13 @@
 										<tr>
 											<td>${company.compCode}</td>
 											<td><a href="#">${company.compName}</a></td>
-											<td>${company.compType}</td>
+<%-- 											<td>${company.compType}</td> --%>
 											<td>${company.agentCnt}</td>
 											<td>${fn:substring(company.insertDate, 0, 10) }</td>
 											<td>admin</td>
 											<td>${fn:substring(company.modifyDate, 0, 10) }</td>
 											<td>admin</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
+											<td><button type="button" onclick="modifyCompany('${company.compCode}');" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" onclick="delCompany('${company.compCode}');" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
 										</tr>
 										</c:forEach>
 									</tbody>
@@ -244,4 +244,24 @@
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.pie.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.resize.js"></script>
 <script type="text/javascript" src="js/jquery.flot/jquery.flot.labels.js"></script>
+<script>
+	//회원을 삭제한다.
+	function delCompany(compCode){
+		personObj=new Object();
+		personObj.compCode=compCode;
+		if(!confirm("회원사를 삭제 하시겠습니까?"))
+			return;
+			
+		$.post( "/admin/company.delete.do", $.param(personObj)).done(function( data ) {
+			if(data.isok=="ok"){
+					alert("정상적으로 삭제 되었습니다.");
+					location.href = "/admin/company.list.do";
+			}else{
+					alert("회원사 삭제중 오류가 있습니다.");
+			}
+		 });
+	}
+	
+	
+</script>
 </body>

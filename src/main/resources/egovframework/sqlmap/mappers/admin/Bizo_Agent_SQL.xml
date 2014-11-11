@@ -9,6 +9,7 @@
 				(SELECT COUNT(COMP_CODE) FROM AGENT AG WHERE AG.COMP_CODE = A.COMP_CODE)AS AGENT_CNT
 			FROM COMPANY A
 			WHERE 1=1
+			AND USE_YN = 'Y'
 		]]>
 			ORDER BY COMP_CODE DESC
 		<if test="startIdx != null">
@@ -22,6 +23,7 @@
 				COUNT(COMP_CODE)AS totCnt
 			FROM COMPANY
 			WHERE 1=1
+			AND USE_YN = 'Y'
 		]]>
 	</select>	
  
@@ -47,4 +49,9 @@
 		]]>
 	</select>	
 	
+	<!-- 회원사 삭제 -->
+	<update id="deleteCompany" parameterType="companyVo">
+		UPDATE COMPANY SET USE_YN = #{useYn}
+		WHERE COMP_CODE = #{compCode}
+	</update>
 </mapper>

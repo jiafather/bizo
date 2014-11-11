@@ -45,4 +45,5 @@ public interface AgentMapper {
     List<?> selectAgentList(AgentVo agentVo) throws Exception;
     int selectCompanyListCnt(CompanyVo companyVo) throws Exception;
     List<?> selectCompanyList(CompanyVo companyVo) throws Exception;
+	int deleteCompany(CompanyVo companyVo) throws Exception;
 }

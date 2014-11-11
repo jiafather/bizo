@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import bizo.admin.service.AgentService;
@@ -112,5 +113,23 @@ public class AgentController  extends BaseController{
 		return "admin/agent/detail";
 	}	
 
+	@RequestMapping(value = "/admin/company.delete.do")
+	public View delCompanyl(@ModelAttribute("companyVo") CompanyVo companyVo, ModelMap model) throws Exception {
+		if(companyVo.getCompCode() != null){
+			companyVo.setUseYn("N");//삭제
+			int deleteCnt = agentService.deleteCompany(companyVo);
+			if(deleteCnt==1){//삭제 성공
+				model.addAttribute("isok", "ok");
+			}else{//삭제 오류
+				model.addAttribute("isok", "no");
+			}
+		}else{
+			model.addAttribute("isok", "no");
+		}
+		
+		return ajaxView;
+	}	
+	
+	
 
 }

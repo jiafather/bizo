@@ -309,7 +309,7 @@
 	$("#btnDelete").click(function(){
 		personObj=new Object();
 		personObj.memberNo="${memberVo.memberNo}";
-		if(!confirm("삭제 하시겠습니까?"))
+		if(!confirm("회원을 삭제 하시겠습니까?"))
 			return;
 			
 		$.post( "/admin/member.delete.do", $.param(personObj)).done(function( data ) {
