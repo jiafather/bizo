@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -137,9 +139,10 @@
 										</tr>
 									</thead>
 									<tbody class="no-border">
+										<c:forEach items="${agentList}" var="agent" varStatus="i">									
 										<tr>
-											<td>samsungfire</td>
-											<td><a href="#">삼성화재</a></td>
+											<td>${agent.compCode}</td>
+											<td><a href="#">${agent.compName}</a></td>
 											<td>00</td>
 											<td>31</td>
 											<td>2014/09/30 08:00:00</td>
@@ -148,28 +151,7 @@
 											<td>admin</td>
 											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
 										</tr>
-										<tr>
-											<td>samsungfire</td>
-											<td><a href="#">삼성화재</a></td>
-											<td>00</td>
-											<td>31</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
-										</tr>
-										<tr>
-											<td>samsungfire</td>
-											<td><a href="#">삼성화재</a></td>
-											<td>00</td>
-											<td>31</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
-										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

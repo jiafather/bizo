@@ -33,7 +33,7 @@ import java.io.Serializable;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
-public class CompanyVo implements Serializable {
+public class CompanyVo extends CommonModel implements Serializable {
 
 	String compCode;  
 	String compName;  
@@ -44,7 +44,14 @@ public class CompanyVo implements Serializable {
 	String insertId;  
 	String modifyDate;
 	String modifyId;
+	String agentCnt;
 	
+	public String getAgentCnt() {
+		return agentCnt;
+	}
+	public void setAgentCnt(String agentCnt) {
+		this.agentCnt = agentCnt;
+	}
 	public String getCompCode() {
 		return compCode;
 	}

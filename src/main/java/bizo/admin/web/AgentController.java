@@ -16,14 +16,20 @@ package bizo.admin.web;
  * limitations under the License.
  */
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import bizo.admin.service.AgentService;
+import bizo.common.vo.AgentVo;
+import bizo.common.vo.CompanyVo;
 import bizo.common.vo.MemberVo;
-import egovframework.example.sample.service.SampleVO;
 
 /**
  * @Class Name : AgentController.java
@@ -43,8 +49,14 @@ import egovframework.example.sample.service.SampleVO;
  */
 
 @Controller("adminAgentController")
-@SessionAttributes(types = SampleVO.class)
-public class AgentController {
+//@SessionAttributes(types = SampleVO.class)
+public class AgentController  extends BaseController{
+	
+	@Resource MappingJacksonJsonView ajaxView;
+	
+	@Resource(name="adminAgentService")
+	private AgentService agentService;	
+	
 	
 	/**
 	 *  회원사 목록으로 이동한다.
@@ -53,8 +65,38 @@ public class AgentController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequestMapping(value = "/admin/company.list.do")
+	public String goCompanyList(@ModelAttribute("companyVo") CompanyVo companyVo, ModelMap model) throws Exception {
+		companyVo.setPagingVal();
+		
+		List<?> companyList = null;
+		rVo = agentService.selectCompanyList(companyVo);
+		companyList = rVo.getList();
+		companyVo.setTotalCount(rVo.getTotalCount());
+		
+		model.addAttribute("companyVo", companyVo);
+		model.addAttribute("companyList", companyList);		
+		return "admin/company/list";
+	}		
+	
+	/**
+	 *  에이전트 목록으로 이동한다.
+	 * @param memberVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/admin/agent.list.do")
-	public String goAgentList(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
+	public String goAgentList(@ModelAttribute("agentVo") AgentVo agentVo, ModelMap model) throws Exception {
+		agentVo.setPagingVal();
+		
+		List<?> agentList = null;
+		rVo = agentService.selectAgentList(agentVo);
+		agentList = rVo.getList();
+		agentVo.setTotalCount(rVo.getTotalCount());
+		
+		model.addAttribute("agentVo", agentVo);
+		model.addAttribute("agentList", agentList);		
 		return "admin/agent/list";
 	}
 	
@@ -65,9 +107,10 @@ public class AgentController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/admin/agent.detail.do")
+	@RequestMapping(value = "/admin/company.detail.do")
 	public String goAgentDetail(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
 		return "admin/agent/detail";
 	}	
+
 
 }

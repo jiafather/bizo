@@ -33,7 +33,7 @@ import java.io.Serializable;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
-public class AgentVo implements Serializable {
+public class AgentVo extends CommonModel  implements Serializable {
 
 	String compCode;
 	String agtCode;

@@ -35,7 +35,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
-public class MemberVo  extends CommonModel  implements Serializable {
+public class MemberVo extends CommonModel  implements Serializable {
 
 	String memberId;
 	String memberNo;	

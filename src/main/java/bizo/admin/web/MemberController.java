@@ -54,7 +54,7 @@ import egovframework.rte.ptl.mvc.bind.annotation.CommandMap;
  */
 
 @Controller("adminMemberController")
-@SessionAttributes(types = SampleVO.class)
+//@SessionAttributes(types = SampleVO.class)
 public class MemberController extends BaseController{
 
 	@Resource MappingJacksonJsonView ajaxView;
