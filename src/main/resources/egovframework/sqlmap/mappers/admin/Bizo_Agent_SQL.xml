@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bizo.admin.service.impl.AgentMapper">
+ 
+	<select id="selectCompanyList" parameterType="companyVo" resultType="egovMap">
+		<![CDATA[			
+			SELECT 
+				A.*,
+				(SELECT COUNT(COMP_CODE) FROM AGENT AG WHERE AG.COMP_CODE = A.COMP_CODE)AS AGENT_CNT
+			FROM COMPANY A
+			WHERE 1=1
+		]]>
+			ORDER BY COMP_CODE DESC
+		<if test="startIdx != null">
+			LIMIT #{startIdx}, #{endIdx}
+		</if>	
+	</select>
+	
+	<select id="selectCompanyListCnt" parameterType="companyVo" resultType="int">
+		<![CDATA[	
+			SELECT
+				COUNT(COMP_CODE)AS totCnt
+			FROM COMPANY
+			WHERE 1=1
+		]]>
+	</select>	
+ 
+	<select id="selectAgentList" parameterType="agentVo" resultType="egovMap">
+		<![CDATA[			
+			SELECT 
+				A.*
+			FROM AGENT A
+			WHERE 1=1
+		]]>
+			ORDER BY COMP_CODE DESC
+		<if test="startIdx != null">
+			LIMIT #{startIdx}, #{endIdx}
+		</if>	
+	</select>
+	
+	<select id="selectAgentListCnt" parameterType="agentVo" resultType="int">
+		<![CDATA[	
+			SELECT
+				COUNT(COMP_CODE)AS totCnt
+			FROM AGENT
+			WHERE 1=1
+		]]>
+	</select>	
+	
+</mapper>
