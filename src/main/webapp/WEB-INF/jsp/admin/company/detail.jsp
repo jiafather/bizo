@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -128,7 +130,7 @@
 										<tr>
 											<th class="text-center">코드</th>
 											<th class="text-center">이름</th>
-											<th class="text-center">타입</th>
+<!-- 											<th class="text-center">타입</th> -->
 											<th class="text-center">대리점수</th>
 											<th class="text-center">등록일</th>
 											<th class="text-center">등록자</th>
@@ -138,14 +140,14 @@
 									</thead>
 									<tbody class="no-border">
 										<tr>
-											<td>samsungfire</td>
-											<td><a href="#">삼성화재</a></td>
-											<td>00</td>
-											<td>31</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
+											<td>${vo.compCode }</td>
+											<td><a href="#">${vo.compName }</a></td>
+<!-- 											<td>00</td> -->
+											<td>${vo.agentCnt}</td>
+											<td>${fn:substring(vo.insertDate, 0, 10) }</td>
+											<td>${vo.insertId }</td>
+											<td>${fn:substring(vo.modifyDate, 0, 10) }</td>
+											<td>${vo.modifyId }</td>
 										</tr>
 									</tbody>
 								</table>
@@ -163,53 +165,39 @@
 										<tr>
 											<th class="text-center">코드</th>
 											<th class="text-center">이름</th>
-											<th class="text-center">타입</th>
+<!-- 											<th class="text-center">타입</th> -->
 											<th class="text-center">사용여부</th>
 											<th class="text-center">등록일</th>
 											<th class="text-center">등록자</th>
 											<th class="text-center">수정일</th>
 											<th class="text-center">수정자</th>
-											<th class="text-center">위치</th>
+<!-- 											<th class="text-center">위치</th> -->
 											<th class="text-center">설정</th>
 										</tr>
 									</thead>
 									<tbody class="no-border">
+									<c:forEach items="${agentList}" var="agent" varStatus="i">
 										<tr>
-											<td>sf001</td>
-											<td><a href="#">삼성동지점</a></td>
-											<td>00</td>
-											<td><span class="label label-success">Y</span></td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-up"></i></button><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-down"></i></button></td>
+											<td>${agent.agtCode }</td>
+											<td><a href="#">${agent.agtName }</a></td>
+<!-- 											<td>00</td> -->
+											<td>
+											<c:choose>
+												<c:when test="${agent.useYn eq 'Y' }"><span class="label label-success">Y</span></c:when>
+												<c:otherwise><span class="label label-danger">N</span></c:otherwise>
+											</c:choose>
+											<c:if test="${agent.useYn eq 'Y' }"></c:if>
+												
+											</td>
+											<c:if test="${agent.useYn eq 'Y' }"></c:if>
+											<td>${fn:substring(agent.insertDate, 0, 10) }</td>
+											<td>${agent.insertId }</td>
+											<td>${fn:substring(agent.modifyDate, 0, 10) }</td>
+											<td>${agent.modifyId }</td>
+<!-- 											<td><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-up"></i></button><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-down"></i></button></td> -->
 											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
 										</tr>
-										<tr>
-											<td>sf001</td>
-											<td><a href="#">삼성동지점</a></td>
-											<td>00</td>
-											<td><span class="label label-success">Y</span></td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-up"></i></button><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-down"></i></button></td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
-										</tr>
-										<tr>
-											<td>sf001</td>
-											<td><a href="#">삼성동지점</a></td>
-											<td>00</td>
-											<td><span class="label label-success">Y</span></td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td>2014/09/30 08:00:00</td>
-											<td>admin</td>
-											<td><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-up"></i></button><button type="button" class="btn btn-trans btn-rad btn-info btn-xs"><i class="fa fa-chevron-down"></i></button></td>
-											<td><button type="button" class="btn btn-trans btn-success btn-rad btn-xs">수정</button><button type="button" class="btn btn-trans btn-danger btn-rad btn-xs">삭제</button></td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>

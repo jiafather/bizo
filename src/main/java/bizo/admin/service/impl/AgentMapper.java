@@ -46,4 +46,5 @@ public interface AgentMapper {
     int selectCompanyListCnt(CompanyVo companyVo) throws Exception;
     List<?> selectCompanyList(CompanyVo companyVo) throws Exception;
 	int deleteCompany(CompanyVo companyVo) throws Exception;
+	EgovMap selectCompany(CompanyVo vo) throws Exception;
 }

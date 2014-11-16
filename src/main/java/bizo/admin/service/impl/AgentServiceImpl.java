@@ -74,7 +74,7 @@ public class AgentServiceImpl extends EgovAbstractServiceImpl implements AgentSe
 	public ReturnVO selectAgentList(AgentVo vo) throws Exception {
 		List list = agentMapper.selectAgentList(vo);
 		Integer totalCount = 0;
-		if(list != null && list.size() > 0)
+		if(list != null && list.size() > 0 && NEED_CNT==vo.getNoNeedCnt())
 			totalCount = (Integer)agentMapper.selectAgentListCnt(vo);
 		
 		ReturnVO rVo = new ReturnVO();
@@ -86,6 +86,11 @@ public class AgentServiceImpl extends EgovAbstractServiceImpl implements AgentSe
 	@Override
 	public int deleteCompany(CompanyVo companyVo) throws Exception {
 		return agentMapper.deleteCompany(companyVo);
+	}
+
+	@Override
+	public EgovMap selectCompany(CompanyVo vo) throws Exception {
+		return agentMapper.selectCompany(vo);
 	}
 
 }

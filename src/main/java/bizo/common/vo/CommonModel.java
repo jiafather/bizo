@@ -28,10 +28,17 @@ public class CommonModel {
 	private Integer pageGroupSize=10;
 	private Integer currentPageIndex=1;
 	private Integer totPageSize=0;
+	private Integer noNeedCnt=0;
 	
 	private Integer startIdx;
 	private Integer endIdx=rowSize;
 	
+	public Integer getNoNeedCnt() {
+		return noNeedCnt;
+	}
+	public void setNoNeedCnt(Integer noNeedCnt) {
+		this.noNeedCnt = noNeedCnt;
+	}
 	public String getDateType() {
 		return dateType;
 	}

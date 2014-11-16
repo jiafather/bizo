@@ -142,7 +142,7 @@
 										<c:forEach items="${companyList}" var="company" varStatus="i">									
 										<tr>
 											<td>${company.compCode}</td>
-											<td><a href="#">${company.compName}</a></td>
+											<td><a href="javascript:goDetail('${company.compCode}');">${company.compName}</a></td>
 <%-- 											<td>${company.compType}</td> --%>
 											<td>${company.agentCnt}</td>
 											<td>${fn:substring(company.insertDate, 0, 10) }</td>
@@ -162,7 +162,8 @@
 							<h3>회원사 등록</h3>
 						</div>
 						<div class="content">
-							<form class="form-horizontal" role="form">
+							<form name="form1" id="form1" class="form-horizontal" role="form" method="post">
+								<input type="hidden" name="compCode" id="compCode" value="" />
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">회원사 코드</label>
 									<div class="col-sm-10">
@@ -262,6 +263,12 @@
 		 });
 	}
 	
+	function goDetail(compCode){
+		var form = document.form1;
+		form.compCode.value = compCode;
+		form.action = "/admin/company.detail.do";
+		form.submit();	
+	}
 	
 </script>
 </body>

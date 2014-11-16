@@ -143,6 +143,7 @@
 									<thead class="no-border">
 										<tr>
 											<th class="text-center">번호</th>
+											<th class="text-center">상태</th>
 											<th class="text-center">아이디</th>
 											<th class="text-center">이름</th>
 											<th class="text-center">연락처</th>
@@ -155,6 +156,7 @@
 									<c:forEach items="${memberList}" var="member" varStatus="i">									
 										<tr>
 											<td>${memberVo.totalCount - ((memberVo.currentPageIndex - 1) * memberVo.rowSize + i.count - 1) }</td>
+											<td><font color="red">${member.stateNm}</font></td>
 											<td class="text-left"><a href="javascript:goDetail('${member.memberNo }');">${member.memberId }</a></td>
 											<td class="text-left">${member.memberName }</td>
 											<td class="text-left">${member.mobile1 }-${member.mobile2 }-${member.mobile3 }</td>

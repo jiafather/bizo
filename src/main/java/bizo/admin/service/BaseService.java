@@ -1,7 +1,3 @@
-package bizo.admin.web;
-
-import bizo.common.vo.ReturnVO;
-
 /*
  * Copyright 2008-2009 the original author or authors.
  *
@@ -17,12 +13,14 @@ import bizo.common.vo.ReturnVO;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package bizo.admin.service;
 
 
+ 
 
-public class BaseController {
-	protected Integer NO_NEED_CNT=1;
-	protected Integer NEED_CNT=0;
-	
-	protected ReturnVO rVo = new ReturnVO();
+
+public interface BaseService {
+
+	Integer NO_NEED_CNT=1;
+	Integer NEED_CNT=0;
 }

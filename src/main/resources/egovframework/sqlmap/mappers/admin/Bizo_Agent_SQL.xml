@@ -17,6 +17,17 @@
 		</if>	
 	</select>
 	
+	<select id="selectCompany" parameterType="companyVo" resultType="egovMap">
+		<![CDATA[			
+			SELECT 
+				A.*,
+				(SELECT COUNT(COMP_CODE) FROM AGENT AG WHERE AG.COMP_CODE = A.COMP_CODE)AS AGENT_CNT
+			FROM COMPANY A
+			WHERE 1=1
+			AND COMP_CODE = #{compCode}
+		]]>
+	</select>
+	
 	<select id="selectCompanyListCnt" parameterType="companyVo" resultType="int">
 		<![CDATA[	
 			SELECT
@@ -34,6 +45,9 @@
 			FROM AGENT A
 			WHERE 1=1
 		]]>
+		<if test="compCode != null">
+			AND COMP_CODE = #{compCode}
+		</if>	
 			ORDER BY COMP_CODE DESC
 		<if test="startIdx != null">
 			LIMIT #{startIdx}, #{endIdx}

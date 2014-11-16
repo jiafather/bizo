@@ -26,6 +26,7 @@
 							<a href="/admin/agent.list.do"><i class="fa fa-briefcase"></i><span>회원사관리</span></a>
 							<ul class="sub-menu">
 								<li><a href="/admin/company.list.do">회원사목록</a></li>
+								<li><a href="/admin/agent.list.do">에이전트</a></li>
 							</ul>							
 						</li>
 						<li>

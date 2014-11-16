@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 import bizo.admin.service.AgentService;
 import bizo.common.vo.AgentVo;
 import bizo.common.vo.CompanyVo;
@@ -81,6 +82,34 @@ public class AgentController  extends BaseController{
 	}		
 	
 	/**
+	 * 회원사 상세화면
+	 * @param companyVo
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/admin/company.detail.do")
+	public String goCompanyDetail(@ModelAttribute("companyVo") CompanyVo companyVo, ModelMap model) throws Exception {
+		companyVo.setPagingVal();
+		
+		EgovMap vo = null;
+		vo = agentService.selectCompany(companyVo);
+		List<?> agentList = null;
+
+		AgentVo agentVo = new AgentVo();
+		agentVo.setStartIdx(null);//페이징 안됨!
+		agentVo.setNoNeedCnt(NO_NEED_CNT);//cnt가 필요 없다.
+		agentVo.setCompCode(companyVo.getCompCode());
+		rVo = agentService.selectAgentList(agentVo);
+		agentList = rVo.getList();
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("companyVo", companyVo);
+		model.addAttribute("agentList", agentList);
+		return "admin/company/detail";
+	}		
+	
+	/**
 	 *  에이전트 목록으로 이동한다.
 	 * @param memberVo
 	 * @param model
@@ -108,10 +137,10 @@ public class AgentController  extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/admin/company.detail.do")
-	public String goAgentDetail(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
-		return "admin/agent/detail";
-	}	
+//	@RequestMapping(value = "/admin/company.detail.do")
+//	public String goAgentDetail(@ModelAttribute("memberVo") MemberVo memberVo, ModelMap model) throws Exception {
+//		return "admin/agent/detail";
+//	}	
 
 	@RequestMapping(value = "/admin/company.delete.do")
 	public View delCompanyl(@ModelAttribute("companyVo") CompanyVo companyVo, ModelMap model) throws Exception {

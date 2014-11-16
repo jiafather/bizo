@@ -15,13 +15,14 @@
  */
 package bizo.admin.service;
 
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 import bizo.common.vo.AgentVo;
 import bizo.common.vo.CompanyVo;
 import bizo.common.vo.ReturnVO;
  
 
 
-public interface AgentService {
+public interface AgentService extends BaseService{
 
     /**
      * 회원사 목록을 조회한다.
@@ -32,5 +33,6 @@ public interface AgentService {
 	ReturnVO selectCompanyList(CompanyVo companyVo) throws Exception;
 	ReturnVO selectAgentList(AgentVo agentVo) throws Exception;
 	int deleteCompany(CompanyVo companyVo) throws Exception;
+	EgovMap selectCompany(CompanyVo companyVo) throws Exception;
 
 }
